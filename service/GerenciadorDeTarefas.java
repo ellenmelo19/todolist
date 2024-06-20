@@ -27,7 +27,7 @@ public class GerenciadorDeTarefas {
   }
 
 
-  public void removerPasta(String nomePasta) {
+  public void removerPasta(String nomePasta) throws PastaNaoEncontradaException {
     List<Pasta> pastas = acessoDados.getTodasPastas();
     for (Pasta pasta : pastas) {
       if (pasta.getNome().equals(nomePasta)) {
@@ -35,7 +35,7 @@ public class GerenciadorDeTarefas {
         return;
       }
     }
-
+    throw new PastaNaoEncontradaException("Pasta com nome \"" + nomePasta + "\" não encontrada.");
   }
 
   public void adicionarTarefa(String nomePasta, Tarefas tarefa) {
@@ -53,7 +53,7 @@ public class GerenciadorDeTarefas {
     acessoDados.adicionarPasta(novaPasta);
   }
 
-  public void removerTarefa(String nomePasta, int id) {
+  public void removerTarefa(String nomePasta, int id) throws PastaNaoEncontradaException {
     List<Pasta> pastas = acessoDados.getTodasPastas();
     for (Pasta pasta : pastas) {
       if (pasta.getNome().equals(nomePasta)) {
@@ -63,7 +63,7 @@ public class GerenciadorDeTarefas {
         return;
       }
     }
-    System.out.println("Tarefa não encontrada");
+    throw new PastaNaoEncontradaException("Pasta com nome \"" + nomePasta + "\" não encontrada.");
   }
 
   public List<Pasta> listarTodasPastas() {

@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ImplementaCollections<T> implements InterfaceBanco<T> {
+public class ImplementaCollections<T extends Comparable<T>> implements InterfaceBanco<T> {
     private List<T> data;
 
     public ImplementaCollections() {
@@ -25,6 +26,8 @@ public class ImplementaCollections<T> implements InterfaceBanco<T> {
 
     @Override
     public List<T> findAll() {
-        return data;
+        return data.stream()
+                   .sorted()
+                   .collect(Collectors.toList());
     }
 }
